@@ -1,0 +1,4 @@
+name: ProtectThePresident
+version: '${version}'
+main: lol.praenyth.plugins.protectthepresident.ProtectThePresident
+api-version: '1.20'
