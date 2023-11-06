@@ -248,25 +248,7 @@ public class Commands {
                                 )
                         )
                 )
-
-
-
-
-
-
-
-
-
-
-
-
-            // Settings
-            .withSubcommand(new CommandAPICommand("settings"))
-                .executes((sender, args) -> {
-                    sender.sendMessage("sup");
-                })
-
-            .register();
+                .register();
 
     }
 
