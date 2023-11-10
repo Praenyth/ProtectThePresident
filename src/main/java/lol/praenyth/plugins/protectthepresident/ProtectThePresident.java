@@ -3,7 +3,10 @@ package lol.praenyth.plugins.protectthepresident;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import lol.praenyth.plugins.protectthepresident.commands.Commands;
+import lol.praenyth.plugins.protectthepresident.runnables.GameLoop;
+import lol.praenyth.plugins.protectthepresident.runnables.Timer;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,11 @@ import java.util.List;
 public final class ProtectThePresident extends JavaPlugin {
 
     public static JavaPlugin instance;
+
+    public static BukkitRunnable GAME;
+    public static BukkitRunnable CLOCK;
+
+    public static GamePeriods CURRENT_POINT = GamePeriods.LOBBY;
 
     public static List<String> presidents;
     public static List<String> bodyguards;
@@ -21,7 +29,7 @@ public final class ProtectThePresident extends JavaPlugin {
         instance = this;
 
         getLogger().info("Enabling CommandAPI...");
-        CommandAPI.onLoad(new CommandAPIBukkitConfig(instance).verboseOutput(true));
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(instance).verboseOutput(false).silentLogs(true));
     }
 
     @Override
@@ -37,6 +45,9 @@ public final class ProtectThePresident extends JavaPlugin {
         getLogger().info("Registering commands!");
         Commands.registerCommands();
         getLogger().info("Commands registered!");
+
+        CLOCK = new Timer();
+        GAME = new GameLoop();
     }
 
     @Override

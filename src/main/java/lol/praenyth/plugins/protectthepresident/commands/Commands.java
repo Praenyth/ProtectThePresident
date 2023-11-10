@@ -1,8 +1,10 @@
 package lol.praenyth.plugins.protectthepresident.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.PlayerArgument;
+import dev.jorel.commandapi.arguments.*;
 import lol.praenyth.plugins.protectthepresident.ProtectThePresident;
+import lol.praenyth.plugins.protectthepresident.runnables.GameLoop;
+import lol.praenyth.plugins.protectthepresident.runnables.Timer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
@@ -10,15 +12,25 @@ import org.bukkit.entity.Player;
 public class Commands {
 
     // default color codes
-    static String GREAT = "#66ff8f";
-    static String SUBPAR = "#ffe066";
-    static String BAD = "#ff6966";
+    public static String GREAT = "#66ff8f";
+    public static String SUBPAR = "#ffe066";
+    public static String BAD = "#ff6966";
 
     public static void registerCommands() {
 
         new CommandAPICommand("protectthepresident")
                 // making sure no random player can just start the game
                 .withPermission("protectthepresident.gamemaster")
+
+                .withSubcommand(new CommandAPICommand("start")
+                        .withArguments(new IntegerArgument("initalSeconds"))
+                        .executes((sender, args) -> {
+                            ProtectThePresident.CLOCK = new Timer();
+
+                            ((GameLoop) ProtectThePresident.GAME).start();
+                            ((Timer) ProtectThePresident.CLOCK).start((Integer) args.get("presidentPlayer"));
+                        })
+                )
 
                 // roles
                 .withSubcommand(new CommandAPICommand("roles")
@@ -246,6 +258,33 @@ public class Commands {
                                     }
                                     )
                                 )
+                        )
+                )
+
+                .withSubcommand(new CommandAPICommand("settings")
+                        .withSubcommand(new CommandAPICommand("mode")
+                                .withArguments(new MultiLiteralArgument("game_mode", "endless","timed"))
+                                .executes((sender, args) -> {
+                                    if (args.get("game_mode").equals("endless")) {
+
+                                        ((Timer) ProtectThePresident.CLOCK).countDown = false;
+                                        sender.sendMessage(
+                                                Component.text(
+                                                        "The game mode has been switched to endless!"
+                                                ).color(TextColor.fromHexString(GREAT))
+                                        );
+
+                                    } else {
+
+                                        ((Timer) ProtectThePresident.CLOCK).countDown = true;
+                                        sender.sendMessage(
+                                                Component.text(
+                                                        "The game mode has been switched to timed!"
+                                                ).color(TextColor.fromHexString(GREAT))
+                                        );
+
+                                    }
+                                })
                         )
                 )
                 .register();
