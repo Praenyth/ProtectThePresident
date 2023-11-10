@@ -3,6 +3,8 @@ package lol.praenyth.plugins.protectthepresident;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import lol.praenyth.plugins.protectthepresident.commands.Commands;
+import lol.praenyth.plugins.protectthepresident.enums.GamePeriods;
+import lol.praenyth.plugins.protectthepresident.listeners.Connection;
 import lol.praenyth.plugins.protectthepresident.runnables.GameLoop;
 import lol.praenyth.plugins.protectthepresident.runnables.Timer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -48,6 +50,9 @@ public final class ProtectThePresident extends JavaPlugin {
 
         CLOCK = new Timer();
         GAME = new GameLoop();
+
+        getLogger().info("Initializing listeners!");
+        getServer().getPluginManager().registerEvents(new Connection(), instance);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package lol.praenyth.plugins.protectthepresident;
+package lol.praenyth.plugins.protectthepresident.enums;
 
 public enum GamePeriods {
     LOBBY,

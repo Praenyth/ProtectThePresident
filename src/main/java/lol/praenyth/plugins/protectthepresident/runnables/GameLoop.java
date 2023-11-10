@@ -22,9 +22,6 @@ public class GameLoop extends BukkitRunnable {
     );
 
     public void start() {
-
-
-
         started = true;
 
         this.runTaskTimer(ProtectThePresident.instance, 0, 20);

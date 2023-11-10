@@ -5,9 +5,14 @@ import dev.jorel.commandapi.arguments.*;
 import lol.praenyth.plugins.protectthepresident.ProtectThePresident;
 import lol.praenyth.plugins.protectthepresident.runnables.GameLoop;
 import lol.praenyth.plugins.protectthepresident.runnables.Timer;
+import net.kyori.adventure.chat.ChatType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.title.Title;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Commands {
 
@@ -25,10 +30,31 @@ public class Commands {
                 .withSubcommand(new CommandAPICommand("start")
                         .withArguments(new IntegerArgument("initalSeconds"))
                         .executes((sender, args) -> {
-                            ProtectThePresident.CLOCK = new Timer();
-
                             ((GameLoop) ProtectThePresident.GAME).start();
-                            ((Timer) ProtectThePresident.CLOCK).start((Integer) args.get("presidentPlayer"));
+                            ((Timer) ProtectThePresident.CLOCK).start((Integer) args.get("initalSeconds"));
+
+                            for (Player pl : Bukkit.getOnlinePlayers()) {
+                                pl.showTitle(Title.title(
+                                        Component.text(
+                                                "The game has started!"
+                                        ).color(TextColor.fromHexString(GREAT)),
+                                        Component.text("")
+                                ));
+
+                                if (ProtectThePresident.presidents.contains(pl.getName())) {
+
+                                    pl.addPotionEffect(new PotionEffect(
+                                            PotionEffectType.GLOWING,
+                                            PotionEffect.INFINITE_DURATION,
+                                            0,
+                                            true,
+                                            false,
+                                            true
+                                    ));
+
+                                }
+                            }
+
                         })
                 )
 

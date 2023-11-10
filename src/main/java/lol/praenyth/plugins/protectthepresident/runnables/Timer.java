@@ -1,6 +1,6 @@
 package lol.praenyth.plugins.protectthepresident.runnables;
 
-import lol.praenyth.plugins.protectthepresident.GamePeriods;
+import lol.praenyth.plugins.protectthepresident.enums.GamePeriods;
 import lol.praenyth.plugins.protectthepresident.ProtectThePresident;
 import lol.praenyth.plugins.protectthepresident.api.Clock;
 import lol.praenyth.plugins.protectthepresident.commands.Commands;
