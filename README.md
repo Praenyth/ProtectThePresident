@@ -30,7 +30,7 @@ When the game starts, Hunter(s) will get a compass that tracks the President(s)'
 - [ ] Settings Section
   - [ ] Toggle for Dimension Hopping (True/False)
   - [ ] President Max Damage
-  - [ ] President Push (only can be enabled if the president cannot deal damage)
+  - [ ] President Push
   - [ ] Border Initial Radius
   - [ ] Border Final Radius
   - [ ] Minigame Modes (Endless/Timed)
