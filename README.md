@@ -1,5 +1,4 @@
 # Protect The President!
-## CURRENTLY UNPLAYABLE!! IT'S IN IT'S VERY EARLY STAGE!!
 
 ### A simple yet silly minigame!
 
