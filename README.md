@@ -33,3 +33,4 @@ When the game starts, Hunter(s) will get a compass that tracks the President(s)'
   - [ ] Border Initial Radius
   - [ ] Border Final Radius
   - [ ] Minigame Modes (Endless/Timed)
+- [ ] Config
