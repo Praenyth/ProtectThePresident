@@ -1,18 +1,18 @@
 package lol.praenyth.plugins.protectthepresident.enums;
 
 public enum Roles {
-    PRESIDENTS("&aP"),
-    BODYGUARDS("&eB"),
-    HUNTERS("&cH"),
-    SPECTATORS("&7");
+    PRESIDENTS(0x66ff8f),
+    BODYGUARDS(0xffe066),
+    HUNTERS(0xff6966),
+    SPECTATORS(0xAAAAAA);
 
-    private final String name;
+    private final int color;
 
-    Roles(String name) {
-        this.name = name;
+    Roles(int color) {
+        this.color = color;
     }
 
-    public String getName() {
-        return name;
+    public int getColor() {
+        return color;
     }
 }

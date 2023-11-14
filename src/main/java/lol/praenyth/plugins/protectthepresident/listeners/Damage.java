@@ -1,6 +1,9 @@
 package lol.praenyth.plugins.protectthepresident.listeners;
 
 import lol.praenyth.plugins.protectthepresident.ProtectThePresident;
+import lol.praenyth.plugins.protectthepresident.api.Teams;
+import lol.praenyth.plugins.protectthepresident.enums.Roles;
+import lol.praenyth.plugins.protectthepresident.runnables.GameLoop;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,9 +29,21 @@ public class Damage implements Listener {
     @EventHandler
     public void presidentDeath(PlayerDeathEvent event) {
 
-        if (ProtectThePresident.presidents.contains(event.getPlayer().getName())) {
+        if (!((GameLoop) ProtectThePresident.GAME).isRunning()) {
+            return;
+        }
 
-            // TODO: check for any other presidents alive and end the game if all presidents have been killed
+        if (Teams.getAllPlayersInTeam(Roles.PRESIDENTS).contains(event.getPlayer().getName())) {
+
+            Player president = event.getPlayer();
+            Teams.setRole(president, Roles.SPECTATORS);
+
+            if (Teams.getAllPlayersInTeam(Roles.PRESIDENTS).isEmpty()) {
+
+                // ending the game so that hunters win.
+                ProtectThePresident.CLOCK.cancel();
+
+            }
 
         }
 

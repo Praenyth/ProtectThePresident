@@ -1,12 +1,16 @@
 package lol.praenyth.plugins.protectthepresident.api;
 
 import lol.praenyth.plugins.protectthepresident.enums.Roles;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import java.util.Set;
 
 public class Teams {
 
@@ -23,7 +27,7 @@ public class Teams {
 
             for (Roles role : Roles.values()) {
                 Team team = SCOREBOARD.registerNewTeam(role.name());
-                team.setPrefix(ChatColor.translateAlternateColorCodes('&', role.getName()+" "));
+                team.color(NamedTextColor.nearestTo(TextColor.color(role.getColor())));
             }
         }
         player.setScoreboard(SCOREBOARD);
@@ -61,11 +65,20 @@ public class Teams {
 
     /**
      * Gets the team from the name
-     * @param name The name of the team
+     * @param role The team
      * @return The team of the player
      */
-    public static Team getTeamFromName(String name) {
-        return SCOREBOARD.getTeam(name);
+    public static Team getTeamFromName(Roles role) {
+        return SCOREBOARD.getTeam(role.name());
+    }
+
+    /**
+     * Gets every player in a team
+     * @param role The team
+     * @return The team of the player
+     */
+    public static Set<String> getAllPlayersInTeam(Roles role) {
+        return getTeamFromName(role).getEntries();
     }
 
     /**
@@ -91,10 +104,6 @@ public class Teams {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             getTeamFromName(p, role.name()).addEntry(player.getName());
-        }
-
-        if (role.equals(Roles.SPECTATORS)) {
-            player.setGameMode(GameMode.SPECTATOR);
         }
 
     }

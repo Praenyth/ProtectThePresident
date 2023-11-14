@@ -19,19 +19,18 @@ When the game starts, Hunter(s) will get a compass that tracks the President(s)'
 
 ## Current Progress
 - [X] Set up roles
-- [ ] Actually able to start the game
-- [ ] Tracker
-- [ ] Glowing President
+- [X] Actually able to start the game
+- [X] Initial Countdown Time
+- [X] Tracker (Gotta fix dimension traveling)
+- [X] Glowing President
 - [ ] Border
-- [ ] Countdown
+- [X] Countdown (sorta... countdown might be broken at some points :p)
 - [ ] Stopwatch
-- [ ] Win Condition (President)
-- [ ] Win Condition (Hunters)
-- [ ] Settings Section
-  - [ ] Toggle for Dimension Hopping (True/False)
+- [X] Win Condition (President)
+- [X] Win Condition (Hunters)
+- [X] Settings Section
   - [ ] President Max Damage
   - [ ] President Push
   - [ ] Border Initial Radius
   - [ ] Border Final Radius
   - [ ] Minigame Modes (Endless/Timed)
-  - [ ] Initial Countdown Time
